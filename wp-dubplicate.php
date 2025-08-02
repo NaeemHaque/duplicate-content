@@ -38,6 +38,20 @@ spl_autoload_register(function ($class) {
     }
 });
 
+function activate_wp_duplicate() {
+    require_once plugin_dir_path(__FILE__) . 'src/Helpers/Activator.php';
+    WPDuplicate\Helpers\Activator::activate();
+}
+
+function deactivate_wp_duplicate() {
+    require_once plugin_dir_path(__FILE__) . 'src/Helpers/Deactivator.php';
+    WPDuplicate\Helpers\Deactivator::deactivate();
+}
+
+register_activation_hook(__FILE__, 'activate_wp_duplicate');
+register_deactivation_hook(__FILE__, 'deactivate_wp_duplicate');
+
+// Initialize the plugin
 function run_wp_duplicate() {
     $plugin = WPDuplicate\Plugin::getInstance();
     $plugin->run();
