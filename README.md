@@ -7,9 +7,13 @@ A powerful WordPress plugin that allows you to duplicate posts, pages, categorie
 - **One-Click Duplication**: Duplicate any content type with a single click
 - **Multiple Content Types**: Support for posts, pages, categories, tags, and custom post types
 - **Taxonomy Support**: Duplicate custom taxonomies and their terms
+- **Settings Management**: Comprehensive settings panel for customization
+- **AJAX-Powered Interface**: Dynamic functionality without page reloads
 - **Clean Interface**: Simple and intuitive WordPress admin interface
 - **Developer Friendly**: Well-structured code with proper namespacing
 - **Internationalization Ready**: Full translation support
+- **Asset Management**: Optimized CSS and JavaScript loading
+- **Error Handling**: Robust error handling and validation
 
 ## 📋 Requirements
 
@@ -40,16 +44,22 @@ After activation, you'll find a new menu item "WP Duplicate" in your WordPress a
 - Main overview of the plugin
 - Quick access to duplication features
 - Status and statistics
+- Recent duplication history
+- System information
 
 ### Settings
 - Configure duplication options
 - Set default behaviors
 - Customize plugin preferences
+- Manage duplication rules
+- Advanced configuration options
 
 ### Help
 - Documentation and guides
 - FAQ section
 - Support information
+- Troubleshooting tips
+- Video tutorials
 
 ## 📁 Plugin Structure
 
@@ -61,25 +71,31 @@ wp-duplicate/
 ├── LICENSE.txt                    # License information
 ├── README.md                      # This file
 ├── readme.txt                     # WordPress.org readme
+├── .gitignore                     # Git ignore rules
 ├── assets/                        # Frontend assets
 │   ├── css/
-│   │   └── admin.css             # Admin styles
+│   │   └── admin.css             # Admin styles (3.7KB)
 │   └── js/
-│       └── admin.js              # Admin scripts
+│       └── admin.js              # Admin scripts (1.5KB)
 ├── languages/                     # Translation files
 │   └── wp-duplicate.pot          # Translation template
 └── src/                          # Source code (MVC structure)
     ├── Plugin.php                # Main plugin class (Singleton)
     ├── Controllers/              # Controller classes
-    │   └── AdminController.php   # Admin menu and functionality
-    ├── Models/                   # Data models (future use)
-    ├── Services/                 # Business logic services (future use)
+    │   └── AdminController.php   # Admin menu and functionality (8.4KB)
+    ├── Models/                   # Data models
+    │   └── Settings.php          # Settings model (9.5KB)
+    ├── Services/                 # Business logic services
+    │   └── DuplicationService.php # Core duplication logic (6.1KB)
     ├── Views/                    # Template files
-    │   ├── dashboard.php         # Dashboard page template
-    │   ├── settings.php          # Settings page template
-    │   └── help.php              # Help page template
+    │   ├── dashboard.php         # Dashboard page template (2.8KB)
+    │   ├── settings.php          # Settings page template (402B)
+    │   └── help.php              # Help page template (3.7KB)
     └── Helpers/                  # Helper classes
-        └── I18n.php              # Internationalization helper
+        ├── I18n.php              # Internationalization helper
+        ├── Loader.php            # Asset loader helper (1.6KB)
+        ├── Activator.php          # Plugin activation handler
+        └── Deactivator.php       # Plugin deactivation handler
 ```
 
 ## 🏗️ Architecture
@@ -97,14 +113,29 @@ The plugin follows a **Model-View-Controller (MVC)** pattern with proper namespa
 - **Menu creation** and admin interface
 - **Asset management** (CSS/JS enqueuing)
 - **Page rendering** for admin pages
+- **AJAX handlers** for dynamic functionality
+
+#### Models/
+- **Settings.php**: Manages plugin settings and configuration
+- **Data validation** and sanitization
+- **Database interactions** for settings storage
+
+#### Services/
+- **DuplicationService.php**: Core business logic for content duplication
+- **Handles different content types** (posts, pages, taxonomies)
+- **Error handling** and validation
 
 #### Views/
 - **Template files** for admin pages
 - **Separation of concerns** between logic and presentation
 - **Easy to customize** and extend
+- **Dashboard, Settings, and Help** page templates
 
 #### Helpers/
 - **I18n.php**: Internationalization support
+- **Loader.php**: Asset loading and management
+- **Activator.php**: Plugin activation tasks
+- **Deactivator.php**: Plugin deactivation cleanup
 - **Reusable utilities** for common functionality
 
 ## 🔧 Development
@@ -115,6 +146,7 @@ The plugin follows a **Model-View-Controller (MVC)** pattern with proper namespa
 2. **Views**: Create template files in `src/Views/`
 3. **Services**: Add business logic in `src/Services/`
 4. **Models**: Create data models in `src/Models/`
+5. **Helpers**: Add utility classes in `src/Helpers/`
 
 ### Code Standards
 
@@ -178,10 +210,15 @@ define('WP_DEBUG_LOG', true);
 
 ### Version 1.0.0
 - Initial release
-- Basic menu structure
-- Admin interface setup
+- Complete MVC architecture implementation
+- Admin interface with Dashboard, Settings, and Help pages
+- Settings management system
+- Duplication service with core business logic
+- Asset management and optimization
 - Internationalization support
-- MVC architecture implementation
+- AJAX-powered dynamic functionality
+- Error handling and validation
+- Helper classes for common functionality
 
 ## 🤝 Contributing
 
