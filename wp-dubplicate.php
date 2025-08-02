@@ -20,9 +20,27 @@ if (!defined('WPINC')) {
 
 define('WP_DUPLICATE_VERSION', '1.0.0');
 
-function run_wp_duplicate()
-{
-    return "Welcome to WP Duplicate";
+// Autoloader for namespaces
+spl_autoload_register(function ($class) {
+    $prefix = 'WPDuplicate\\';
+    $base_dir = plugin_dir_path(__FILE__) . 'src/';
+
+    $len = strlen($prefix);
+    if (strncmp($prefix, $class, $len) !== 0) {
+        return;
+    }
+
+    $relative_class = substr($class, $len);
+    $file = $base_dir . str_replace('\\', '/', $relative_class) . '.php';
+
+    if (file_exists($file)) {
+        require $file;
+    }
+});
+
+function run_wp_duplicate() {
+    $plugin = WPDuplicate\Plugin::getInstance();
+    $plugin->run();
 }
 
 run_wp_duplicate();
