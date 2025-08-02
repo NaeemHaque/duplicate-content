@@ -25,6 +25,8 @@ class Plugin
         require_once plugin_dir_path(dirname(__FILE__)) . 'src/Helpers/Loader.php';
         require_once plugin_dir_path(dirname(__FILE__)) . 'src/Helpers/I18n.php';
         require_once plugin_dir_path(dirname(__FILE__)) . 'src/Controllers/AdminController.php';
+        require_once plugin_dir_path(dirname(__FILE__)) . 'src/Services/DuplicationService.php';
+        require_once plugin_dir_path(dirname(__FILE__)) . 'src/Models/Settings.php';
     }
 
     private function setLocale()
@@ -44,7 +46,18 @@ class Plugin
         // Admin menu
         add_action('admin_menu', [$adminController, 'addAdminMenu']);
 
+        // Row actions
+        add_filter('post_row_actions', [$adminController, 'addDuplicatePostAction'], 10, 2);
+        add_filter('page_row_actions', [$adminController, 'addDuplicatePostAction'], 10, 2);
+        add_filter('tag_row_actions', [$adminController, 'addDuplicateTaxonomyAction'], 10, 2);
+        add_filter('category_row_actions', [$adminController, 'addDuplicateTaxonomyAction'], 10, 2);
+
+        // AJAX handlers
+        add_action('wp_ajax_wp_duplicate_post', [$adminController, 'duplicatePostAjax']);
+        add_action('wp_ajax_wp_duplicate_taxonomy', [$adminController, 'duplicateTaxonomyAjax']);
+
         // Custom hooks
+        add_action('init', [$adminController, 'registerCustomHooks']);
         add_action('admin_init', [$adminController, 'registerSettings']);
     }
 

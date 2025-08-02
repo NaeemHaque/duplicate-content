@@ -4,7 +4,8 @@ namespace WPDuplicate\Helpers;
 
 class I18n
 {
-    public function loadPluginTextdomain() {
+    public function loadPluginTextdomain()
+    {
         load_plugin_textdomain(
             'wp-duplicate',
             false,

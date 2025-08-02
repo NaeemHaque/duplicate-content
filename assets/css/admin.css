@@ -172,6 +172,9 @@
 .wpdc-duplicate-action.updating-message {
     color: #856404;
     font-style: italic;
+    text-decoration: none;
+    box-shadow: none;
+    cursor: not-allowed;
 }
 
 .wpdc-duplicate-action.updated-message {
@@ -185,9 +188,7 @@
 }
 
 .wpdc-duplicate-action.hover {
-    background-color: #f0f0f0;
-    padding: 2px 4px;
-    border-radius: 3px;
+   text-decoration: none;
 }
 
 /* Success/Error Messages */
