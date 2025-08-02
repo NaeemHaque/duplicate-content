@@ -1,1 +1,222 @@
+/* Dashboard Styles */
+.wpdc-dashboard {
+    margin-top: 20px;
+}
 
+.wpdc-welcome {
+    background: #fff;
+    border: 1px solid #ccd0d4;
+    border-radius: 8px;
+    padding: 20px !important;
+    margin-bottom: 20px !important;
+}
+
+.wpdc-welcome h2 {
+    margin-top: 0;
+    color: #23282d;
+}
+
+.wpdc-dashboard-stats {
+    margin-bottom: 20px 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
+.wpdc-stat-card {
+    background: #fff;
+    border: 1px solid #ccd0d4;
+    border-radius: 8px;
+    padding: 20px;
+    display: grid;
+    margin-right: 15px;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.wpdc-stat-number {
+    font-size: 2em;
+    font-weight: bold;
+    color: #0073aa;
+    margin: 10px 0;
+}
+
+.wpdc-quick-actions {
+    background: #fff;
+    border: 1px solid #ccd0d4;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.wpdc-action-buttons {
+    margin-top: 15px;
+}
+
+.wpdc-action-buttons .button {
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+
+.wpdc-how-to {
+    background: #fff;
+    border: 1px solid #ccd0d4;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.wpdc-how-to ol {
+    margin-left: 20px;
+}
+
+.wpdc-how-to li {
+    margin-bottom: 8px;
+}
+
+.wpdc-help-link {
+    background: #fff;
+    border: 1px solid #ccd0d4;
+    border-radius: 8px;
+    padding: 20px;
+}
+
+/* Settings Page Styles */
+.wpdc-settings-title {
+    margin-bottom: 20px;
+}
+
+#wpdc-settings-form {
+    background: #fff;
+    border: 1px solid #ccd0d4;
+    border-radius: 8px;
+    padding: 20px;
+}
+
+/* Help Page Styles */
+.wpdc-help-title {
+    margin-bottom: 20px;
+}
+
+.wpdc-help-content {
+    margin-top: 20px;
+}
+
+.wpdc-help-section {
+    background: #fff;
+    border: 1px solid #ccd0d4;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.wpdc-help-section h2 {
+    margin-top: 0;
+    color: #23282d;
+    border-bottom: 2px solid #0073aa;
+    padding-bottom: 10px;
+}
+
+.wpdc-help-section h3 {
+    color: #444;
+    margin-top: 20px;
+}
+
+.wpdc-help-section ul, .wpdc-help-section ol {
+    margin-left: 20px;
+}
+
+.wpdc-help-section li {
+    margin-bottom: 8px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .wpdc-stat-card {
+        width: calc(50% - 15px);
+    }
+
+    .wpdc-action-buttons .button {
+        display: block;
+        width: 100%;
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .wpdc-stat-card {
+        width: 100%;
+        margin-right: 0;
+    }
+}
+
+/* Duplicate Action Styling */
+.wpdc-duplicate-action {
+    color: #0073aa;
+    text-decoration: none;
+    transition: color 0.2s ease;
+    cursor: pointer;
+}
+
+.wpdc-duplicate-action:hover {
+    color: #005a87;
+    text-decoration: underline;
+}
+
+.wpdc-duplicate-action.processing {
+    pointer-events: none;
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.wpdc-duplicate-action.updating-message {
+    color: #856404;
+    font-style: italic;
+}
+
+.wpdc-duplicate-action.updated-message {
+    color: #155724;
+    font-weight: bold;
+}
+
+.wpdc-duplicate-action.error-message {
+    color: #721c24;
+    font-weight: bold;
+}
+
+.wpdc-duplicate-action.hover {
+    background-color: #f0f0f0;
+    padding: 2px 4px;
+    border-radius: 3px;
+}
+
+/* Success/Error Messages */
+.wpdc-notice {
+    padding: 10px 15px;
+    border-radius: 8px;
+    margin: 10px 0;
+}
+
+.wpdc-notice.success {
+    background: #d4edda;
+    border: 1px solid #c3e6cb;
+    color: #155724;
+}
+
+.wpdc-notice.error {
+    background: #f8d7da;
+    border: 1px solid #f5c6cb;
+    color: #721c24;
+}
+
+.wpdc-notice.warning {
+    background: #fff3cd;
+    border: 1px solid #ffeaa7;
+    color: #856404;
+}
+
+/* Settings form enhancements */
+#wpdc-settings-form input[type="submit"]:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
