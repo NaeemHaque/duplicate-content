@@ -107,10 +107,11 @@ class Settings
         $sanitized_input['wp_duplicate_enable_custom_post_types'] = isset($input['wp_duplicate_enable_custom_post_types']) ? '1' : '';
         $sanitized_input['wp_duplicate_enable_custom_taxonomies'] = isset($input['wp_duplicate_enable_custom_taxonomies']) ? '1' : '';
 
-        if (isset($input['wp_duplicate_permissions'])) {
-            $sanitized_input['wp_duplicate_permissions'] = sanitize_text_field(
-                $input['wp_duplicate_permissions']
-            );
+        if (isset($input['wp_duplicate_permissions']) && is_array($input['wp_duplicate_permissions'])) {
+            $sanitized_input['wp_duplicate_permissions'] = array_map('sanitize_text_field', $input['wp_duplicate_permissions']);
+        } else {
+            // Fallback for backward compatibility
+            $sanitized_input['wp_duplicate_permissions'] = array('administrator');
         }
 
         return $sanitized_input;
@@ -365,47 +366,40 @@ class Settings
 
     public function permissionsFieldCallback()
     {
-        $options             = get_option($this->option_name, array());
-        $current_permissions = isset($options['wp_duplicate_permissions']) ? $options['wp_duplicate_permissions'] : 'administrator';
+        $options = get_option($this->option_name, array());
+        
+        // Handle backward compatibility - convert old single value to array
+        $current_permissions = isset($options['wp_duplicate_permissions']) ? $options['wp_duplicate_permissions'] : array('administrator');
+        if (!is_array($current_permissions)) {
+            $current_permissions = array($current_permissions);
+        }
+        
+        // Get all user roles from WordPress
+        $wp_roles = wp_roles();
+        $roles = $wp_roles->get_names();
+        
         ?>
         <fieldset>
             <legend class="screen-reader-text"><?php
                 _e('User Permissions', 'wp-duplicate'); ?></legend>
-            <label for="wp_duplicate_admin_only">
-                <input type="radio" name="<?php
-                echo $this->option_name; ?>[wp_duplicate_permissions]" id="wp_duplicate_admin_only"
-                       value="administrator" <?php
-                checked(
-                    $current_permissions,
-                    'administrator'
-                ); ?> />
+            <p class="description"><?php
+                _e('Select which user roles can duplicate content. Users with any of the selected roles will have access to duplicate functionality.', 'wp-duplicate'); ?></p>
+            <?php
+            foreach ($roles as $role_key => $role_name) {
+                $checked = in_array($role_key, $current_permissions) ? 'checked' : '';
+                ?>
+                <label for="wp_duplicate_role_<?php echo esc_attr($role_key); ?>">
+                    <input type="checkbox" 
+                           name="<?php echo $this->option_name; ?>[wp_duplicate_permissions][]" 
+                           id="wp_duplicate_role_<?php echo esc_attr($role_key); ?>"
+                           value="<?php echo esc_attr($role_key); ?>" 
+                           <?php echo $checked; ?> />
+                    <?php echo esc_html($role_name); ?>
+                </label>
+                <br/>
                 <?php
-                _e('Administrators only', 'wp-duplicate'); ?>
-            </label>
-            <br/>
-            <label for="wp_duplicate_editor_plus">
-                <input type="radio" name="<?php
-                echo $this->option_name; ?>[wp_duplicate_permissions]" id="wp_duplicate_editor_plus"
-                       value="editor" <?php
-                checked(
-                    $current_permissions,
-                    'editor'
-                ); ?> />
-                <?php
-                _e('Editors and Administrators', 'wp-duplicate'); ?>
-            </label>
-            <br/>
-            <label for="wp_duplicate_author_plus">
-                <input type="radio" name="<?php
-                echo $this->option_name; ?>[wp_duplicate_permissions]" id="wp_duplicate_author_plus"
-                       value="author" <?php
-                checked(
-                    $current_permissions,
-                    'author'
-                ); ?> />
-                <?php
-                _e('Authors, Editors, and Administrators', 'wp-duplicate'); ?>
-            </label>
+            }
+            ?>
         </fieldset>
         <?php
     }

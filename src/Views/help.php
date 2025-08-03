@@ -89,7 +89,7 @@ if (!defined('ABSPATH')) {
                 </li>
                 <li>
                     <span class="dashicons dashicons-arrow-right-alt"></span>
-                    <?php _e('User permissions for duplication', 'wp-duplicate'); ?>
+                    <?php _e('User role permissions for duplication (multiple roles can be selected)', 'wp-duplicate'); ?>
                 </li>
             </ul>
         </div>
@@ -100,7 +100,7 @@ if (!defined('ABSPATH')) {
             <ul>
                 <li>
                     <span class="dashicons dashicons-arrow-right-alt"></span>
-                    <?php _e('Check your user permissions', 'wp-duplicate'); ?></li>
+                    <?php _e('Check your user role permissions', 'wp-duplicate'); ?></li>
                 <li>
                     <span class="dashicons dashicons-arrow-right-alt"></span>
                     <?php _e('Ensure the content type is supported', 'wp-duplicate'); ?>

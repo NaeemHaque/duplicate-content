@@ -229,18 +229,29 @@ class AdminController
 
     private function canUserDuplicate()
     {
-        $permissions = $this->settings->get('wp_duplicate_permissions', 'administrator');
-
-        switch ($permissions) {
-            case 'administrator':
-                return current_user_can('manage_options');
-            case 'editor':
-                return current_user_can('edit_others_posts');
-            case 'author':
-                return current_user_can('edit_posts');
-            default:
-                return current_user_can('manage_options');
+        $permissions = $this->settings->get('wp_duplicate_permissions', array('administrator'));
+        
+        // Handle backward compatibility - convert old single value to array
+        if (!is_array($permissions)) {
+            $permissions = array($permissions);
         }
+        
+        // If no roles are selected, default to administrators only
+        if (empty($permissions)) {
+            return current_user_can('manage_options');
+        }
+        
+        // Check if current user has any of the selected roles
+        $current_user = wp_get_current_user();
+        $user_roles = $current_user->roles;
+        
+        foreach ($permissions as $role) {
+            if (in_array($role, $user_roles)) {
+                return true;
+            }
+        }
+        
+        return false;
     }
 
     private function isDuplicatablePostType($post_type)

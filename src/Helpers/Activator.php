@@ -16,7 +16,7 @@ class Activator
                 'wp_duplicate_copy_taxonomies'  => '1',
                 'wp_duplicate_copy_comments'    => '',
                 'wp_duplicate_copy_attachments' => '',
-                'wp_duplicate_permissions'      => 'administrator'
+                'wp_duplicate_permissions'      => array('administrator')
             );
             add_option('wp_duplicate_options', $default_options);
         }
