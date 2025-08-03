@@ -335,21 +335,21 @@
 }
 
 .wpdc-help-content {
-    margin-top: 20px;
+    padding: 20px;
 }
 
 .wpdc-help-section {
     background: #fff;
-    border: 1px solid #ccd0d4;
     border-radius: 8px;
     padding: 20px;
     margin-bottom: 20px;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.03);
 }
 
 .wpdc-help-section h2 {
     margin-top: 0;
     color: #23282d;
-    border-bottom: 2px solid #0073aa;
+    border-bottom: 1px solid #dedddd;
     padding-bottom: 10px;
 }
 
@@ -364,6 +364,13 @@
 
 .wpdc-help-section li {
     margin-bottom: 8px;
+}
+.wpdc-help-section li span.dashicons {
+    color: #667eea;
+    font-size: 14px;
+    width: 16px;
+    height: 16px;
+    margin-top: 2px;
 }
 
 /* Responsive Design */

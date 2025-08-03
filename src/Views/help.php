@@ -7,7 +7,7 @@ if (!defined('ABSPATH')) {
 <?php require_once plugin_dir_path(dirname(__FILE__)) . 'Views/navbar.php'; ?>
 
 <div class="wrap wpdc-content">
-    <h1 class="wpdc-help-title"><?php _e('WP Duplicate Help', 'wp-duplicate'); ?></h1>
+    <p class="wpdc-welcome"><?php _e('Dashboard', 'wp-duplicate'); ?></p>
 
     <div class="wpdc-help-content">
         <div class="wpdc-help-section">
@@ -18,23 +18,56 @@ if (!defined('ABSPATH')) {
         <div class="wpdc-help-section">
             <h2><?php _e('Supported Content Types', 'wp-duplicate'); ?></h2>
             <ul>
-                <li><?php _e('Posts and Pages', 'wp-duplicate'); ?></li>
-                <li><?php _e('Custom Post Types', 'wp-duplicate'); ?></li>
-                <li><?php _e('Categories and Tags', 'wp-duplicate'); ?></li>
-                <li><?php _e('Custom Taxonomies', 'wp-duplicate'); ?></li>
+                <li>
+                    <span class="dashicons dashicons-arrow-right-alt"></span>
+                    <?php _e('Posts and Pages', 'wp-duplicate'); ?>
+                </li>
+                <li>
+                    <span class="dashicons dashicons-arrow-right-alt"></span>
+                    <?php _e('Custom Post Types', 'wp-duplicate'); ?>
+                </li>
+                <li>
+                    <span class="dashicons dashicons-arrow-right-alt"></span>
+                    <?php _e('Categories and Tags', 'wp-duplicate'); ?>
+                </li>
+                <li>
+                    <span class="dashicons dashicons-arrow-right-alt"></span>
+                    <?php _e('Custom Taxonomies', 'wp-duplicate'); ?>
+                </li>
             </ul>
         </div>
 
         <div class="wpdc-help-section">
             <h2><?php _e('What Gets Duplicated', 'wp-duplicate'); ?></h2>
             <ul>
-                <li><?php _e('Title (with prefix)', 'wp-duplicate'); ?></li>
-                <li><?php _e('Content and excerpt', 'wp-duplicate'); ?></li>
-                <li><?php _e('Custom fields and meta data (optional)', 'wp-duplicate'); ?></li>
-                <li><?php _e('Categories, tags, and taxonomies (optional)', 'wp-duplicate'); ?></li>
-                <li><?php _e('Featured image', 'wp-duplicate'); ?></li>
-                <li><?php _e('Comments (optional)', 'wp-duplicate'); ?></li>
-                <li><?php _e('Attached media files (optional)', 'wp-duplicate'); ?></li>
+                <li>
+                    <span class="dashicons dashicons-arrow-right-alt"></span>
+                    <?php _e('Title (with prefix)', 'wp-duplicate'); ?>
+                </li>
+                <li>
+                    <span class="dashicons dashicons-arrow-right-alt"></span>
+                    <?php _e('Content and excerpt', 'wp-duplicate'); ?>
+                </li>
+                <li>
+                    <span class="dashicons dashicons-arrow-right-alt"></span>
+                    <?php _e('Custom fields and meta data (optional)', 'wp-duplicate'); ?>
+                </li>
+                <li>
+                    <span class="dashicons dashicons-arrow-right-alt"></span>
+                    <?php _e('Categories, tags, and taxonomies (optional)', 'wp-duplicate'); ?>
+                </li>
+                <li>
+                    <span class="dashicons dashicons-arrow-right-alt"></span>
+                    <?php _e('Featured image', 'wp-duplicate'); ?>
+                </li>
+                <li>
+                    <span class="dashicons dashicons-arrow-right-alt"></span>
+                    <?php _e('Comments (optional)', 'wp-duplicate'); ?>
+                </li>
+                <li>
+                    <span class="dashicons dashicons-arrow-right-alt"></span>
+                    <?php _e('Attached media files (optional)', 'wp-duplicate'); ?>
+                </li>
             </ul>
         </div>
 
@@ -42,10 +75,22 @@ if (!defined('ABSPATH')) {
             <h2><?php _e('Settings Configuration', 'wp-duplicate'); ?></h2>
             <p><?php _e('Configure your duplication preferences in the Settings page:', 'wp-duplicate'); ?></p>
             <ul>
-                <li><?php _e('Default status for duplicated content', 'wp-duplicate'); ?></li>
-                <li><?php _e('Title prefix for duplicated items', 'wp-duplicate'); ?></li>
-                <li><?php _e('Copy options (meta, taxonomies, comments, attachments)', 'wp-duplicate'); ?></li>
-                <li><?php _e('User permissions for duplication', 'wp-duplicate'); ?></li>
+                <li>
+                    <span class="dashicons dashicons-arrow-right-alt"></span>
+                    <?php _e('Default status for duplicated content', 'wp-duplicate'); ?>
+                </li>
+                <li>
+                    <span class="dashicons dashicons-arrow-right-alt"></span>
+                    <?php _e('Title prefix for duplicated items', 'wp-duplicate'); ?>
+                </li>
+                <li>
+                    <span class="dashicons dashicons-arrow-right-alt"></span>
+                    <?php _e('Copy options (meta, taxonomies, comments, attachments)', 'wp-duplicate'); ?>
+                </li>
+                <li>
+                    <span class="dashicons dashicons-arrow-right-alt"></span>
+                    <?php _e('User permissions for duplication', 'wp-duplicate'); ?>
+                </li>
             </ul>
         </div>
 
@@ -53,10 +98,20 @@ if (!defined('ABSPATH')) {
             <h2><?php _e('Troubleshooting', 'wp-duplicate'); ?></h2>
             <p><?php _e('If you encounter issues:', 'wp-duplicate'); ?></p>
             <ul>
-                <li><?php _e('Check your user permissions', 'wp-duplicate'); ?></li>
-                <li><?php _e('Ensure the content type is supported', 'wp-duplicate'); ?></li>
-                <li><?php _e('Verify your WordPress installation is up to date', 'wp-duplicate'); ?></li>
-                <li><?php _e('Check for conflicts with other plugins', 'wp-duplicate'); ?></li>
+                <li>
+                    <span class="dashicons dashicons-arrow-right-alt"></span>
+                    <?php _e('Check your user permissions', 'wp-duplicate'); ?></li>
+                <li>
+                    <span class="dashicons dashicons-arrow-right-alt"></span>
+                    <?php _e('Ensure the content type is supported', 'wp-duplicate'); ?>
+                </li>
+                <li>
+                    <span class="dashicons dashicons-arrow-right-alt"></span>
+                    <?php _e('Verify your WordPress installation is up to date', 'wp-duplicate'); ?></li>
+                <li>
+                    <span class="dashicons dashicons-arrow-right-alt"></span>
+                    <?php _e('Check for conflicts with other plugins', 'wp-duplicate'); ?>
+                </li>
             </ul>
         </div>
 
