@@ -1,51 +1,152 @@
+/* Global Navbar Styles */
+
+.wpdc-navbar {
+    position: relative;
+    height: 60px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    margin-left: -20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.wpdc-navbar-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+    padding: 0;
+    width: 100%;
+}
+
+.wpdc-navbar-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding-left: 20px;
+}
+
+.wpdc-navbar-logo {
+    width: 32px;
+    height: 32px;
+    filter: brightness(0) invert(1);
+}
+
+.wpdc-navbar-title {
+    color: white;
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.wpdc-navbar-menu {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    padding-right: 20px;
+}
+
+.wpdc-navbar-link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 20px;
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 14px;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.wpdc-navbar-link:hover {
+    color: white;
+    background: rgba(255, 255, 255, 0.1);
+    text-decoration: none;
+}
+
+.wpdc-navbar-link.active {
+    color: white;
+    background: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.wpdc-navbar-link .dashicons {
+    font-size: 16px;
+    width: 16px;
+    height: 16px;
+}
+
+/* Content adjustment for navbar */
+.wpdc-content {
+    margin-top: 0;
+    font-family: 'Inter', sans-serif;
+    background-color: #f8fafc;
+    margin-left: -20px;
+    margin-right: 0;
+    padding: 20px;
+}
+
+/* Wrap styling for navbar integration */
+.wpdc-content .wrap {
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    background-color: #f8fafc;
+    width: 100%;
+}
+
 /* Dashboard Styles */
 .wpdc-dashboard {
     margin-top: 20px;
 }
 
 .wpdc-welcome {
-    background: #fff;
-    border: 1px solid #ccd0d4;
-    border-radius: 8px;
-    padding: 20px !important;
-    margin-bottom: 20px !important;
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #667eea;
+    margin: 0;
+    padding: 0 20px;
 }
 
-.wpdc-welcome h2 {
-    margin-top: 0;
-    color: #23282d;
-}
 
 .wpdc-dashboard-stats {
-    margin-bottom: 20px 0;
+    padding: 20px;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    column-gap: 20px;
 }
 
 .wpdc-stat-card {
     background: #fff;
-    border: 1px solid #ccd0d4;
     border-radius: 8px;
     padding: 20px;
     display: grid;
-    margin-right: 15px;
     margin-bottom: 15px;
     text-align: center;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.03);
 }
 
 .wpdc-stat-number {
-    font-size: 2em;
+    font-size: 4em;
     font-weight: bold;
-    color: #0073aa;
-    margin: 10px 0;
+    color: #667eea;
+    margin: 0;
+}
+
+.wpdc-stat-label {
+    color: #6b6a6a;
+    margin: 0;
+    font-size: 14px;
+    font-weight: 500;
 }
 
 .wpdc-quick-actions {
     background: #fff;
-    border: 1px solid #ccd0d4;
     border-radius: 8px;
     padding: 20px;
-    margin-bottom: 20px;
+    margin: 0 20px;
 }
 
 .wpdc-action-buttons {
@@ -59,10 +160,9 @@
 
 .wpdc-how-to {
     background: #fff;
-    border: 1px solid #ccd0d4;
     border-radius: 8px;
     padding: 20px;
-    margin-bottom: 20px;
+    margin: 20px;
 }
 
 .wpdc-how-to ol {
@@ -73,11 +173,47 @@
     margin-bottom: 8px;
 }
 
-.wpdc-help-link {
-    background: #fff;
-    border: 1px solid #ccd0d4;
+.wpdc-view-help {
+    margin-top: 30px;
+}
+
+
+.wpdc-primary-button {
+    text-decoration: none;
+    background: #667eea;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    cursor: pointer;
     border-radius: 8px;
-    padding: 20px;
+    font-size: 16px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    margin-right: 8px;
+}
+
+.wpdc-primary-button:hover {
+    background: #5a67d8;
+    color: white;
+    text-decoration: none;
+}
+
+.wpdc-secondary-button {
+    background: #f0f0f0;
+    color: #333;
+    padding: 8px 16px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+.wpdc-secondary-button:hover {
+    background: #e0e0e0;
+    color: #23282d;
+    text-decoration: none;
 }
 
 /* Settings Page Styles */
@@ -210,6 +346,30 @@
 
 /* Responsive Design */
 @media (max-width: 768px) {
+    .wpdc-navbar-brand {
+        padding-left: 15px;
+    }
+
+    .wpdc-navbar-menu {
+        padding-right: 15px;
+    }
+
+    .wpdc-navbar-title {
+        font-size: 16px;
+    }
+
+    .wpdc-navbar-link {
+        padding: 10px 15px;
+        font-size: 13px;
+    }
+
+    .wpdc-navbar-link .dashicons {
+        font-size: 14px;
+        width: 14px;
+        height: 14px;
+    }
+
+
     .wpdc-stat-card {
         width: calc(50% - 15px);
     }
@@ -236,6 +396,27 @@
 }
 
 @media (max-width: 480px) {
+    .wpdc-navbar-brand {
+        padding-left: 10px;
+    }
+
+    .wpdc-navbar-menu {
+        padding-right: 10px;
+    }
+
+    .wpdc-navbar-title {
+        font-size: 14px;
+    }
+
+    .wpdc-navbar-link {
+        padding: 8px 12px;
+        font-size: 12px;
+    }
+
+    .wpdc-navbar-link span:not(.dashicons) {
+        display: none;
+    }
+
     .wpdc-stat-card {
         width: 100%;
         margin-right: 0;

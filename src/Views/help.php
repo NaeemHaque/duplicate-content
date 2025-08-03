@@ -4,7 +4,9 @@ if (!defined('ABSPATH')) {
 }
 ?>
 
-<div class="wrap">
+<?php require_once plugin_dir_path(dirname(__FILE__)) . 'Views/navbar.php'; ?>
+
+<div class="wrap wpdc-content">
     <h1 class="wpdc-help-title"><?php _e('WP Duplicate Help', 'wp-duplicate'); ?></h1>
 
     <div class="wpdc-help-content">
