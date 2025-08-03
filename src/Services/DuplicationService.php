@@ -24,16 +24,25 @@ class DuplicationService
 
         $default_status   = $this->settings->get('wp_duplicate_copy_status', 'draft');
         $title_prefix     = $this->settings->get('wp_duplicate_copy_title', 'Copy of ');
+        $title_suffix     = $this->settings->get('wp_duplicate_copy_suffix', '');
         $copy_meta        = $this->settings->get('wp_duplicate_copy_meta', '1');
         $copy_taxonomies  = $this->settings->get('wp_duplicate_copy_taxonomies', '1');
         $copy_comments    = $this->settings->get('wp_duplicate_copy_comments', '');
         $copy_attachments = $this->settings->get('wp_duplicate_copy_attachments', '');
 
+        // Handle status based on settings
+        $post_status = $default_status;
+        if ($default_status === 'same') {
+            $post_status = $post->post_status;
+        }
+
+        $formatted_title = $this->formatDuplicateTitle($title_prefix, $post->post_title, $title_suffix);
+
         $new_post_data = array(
-            'post_title'     => $title_prefix . $post->post_title,
+            'post_title'     => $formatted_title,
             'post_content'   => $post->post_content,
             'post_excerpt'   => $post->post_excerpt,
-            'post_status'    => $default_status,
+            'post_status'    => $post_status,
             'post_type'      => $post->post_type,
             'post_author'    => get_current_user_id(),
             'post_parent'    => $post->post_parent,
@@ -78,13 +87,16 @@ class DuplicationService
         }
 
         $title_prefix = $this->settings->get('wp_duplicate_copy_title', 'Copy of ');
+        $title_suffix = $this->settings->get('wp_duplicate_copy_suffix', '');
+
+        $formatted_title = $this->formatDuplicateTitle($title_prefix, $term->name, $title_suffix);
 
         $new_term_data = array(
             'description' => $term->description,
             'slug'        => $term->slug . '-copy',
         );
 
-        $new_term = wp_insert_term($title_prefix . $term->name, $taxonomy, $new_term_data);
+        $new_term = wp_insert_term($formatted_title, $taxonomy, $new_term_data);
 
         if (is_wp_error($new_term)) {
             return false;
@@ -185,5 +197,24 @@ class DuplicationService
                 add_term_meta($new_id, $meta_key, $meta_value);
             }
         }
+    }
+
+
+    private function formatDuplicateTitle($prefix, $title, $suffix)
+    {
+        $prefix = trim($prefix);
+        $suffix = trim($suffix);
+
+        $formatted_title = $title;
+
+        if (!empty($prefix)) {
+            $formatted_title = $prefix . ' ' . $formatted_title;
+        }
+
+        if (!empty($suffix)) {
+            $formatted_title = $formatted_title . ' ' . $suffix;
+        }
+
+        return $formatted_title;
     }
 } 

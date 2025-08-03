@@ -39,6 +39,14 @@ class Settings
         );
 
         add_settings_field(
+            'wp_duplicate_copy_suffix',
+            __('Title Suffix', 'wp-duplicate'),
+            [$this, 'suffixFieldCallback'],
+            'wp_duplicate_settings',
+            'wp_duplicate_general_section'
+        );
+
+        add_settings_field(
             'wp_duplicate_copy_options',
             __('Copy Options', 'wp-duplicate'),
             [$this, 'copyOptionsFieldCallback'],
@@ -76,6 +84,12 @@ class Settings
         if (isset($input['wp_duplicate_copy_title'])) {
             $sanitized_input['wp_duplicate_copy_title'] = sanitize_text_field(
                 $input['wp_duplicate_copy_title']
+            );
+        }
+
+        if (isset($input['wp_duplicate_copy_suffix'])) {
+            $sanitized_input['wp_duplicate_copy_suffix'] = sanitize_text_field(
+                $input['wp_duplicate_copy_suffix']
             );
         }
 
@@ -135,6 +149,18 @@ class Settings
                 'private'
             ); ?>><?php
                 _e('Private', 'wp-duplicate'); ?></option>
+            <option value="publish" <?php
+            selected(
+                $current_status,
+                'publish'
+            ); ?>><?php
+                _e('Publish', 'wp-duplicate'); ?></option>
+            <option value="same" <?php
+            selected(
+                $current_status,
+                'same'
+            ); ?>><?php
+                _e('Same as original', 'wp-duplicate'); ?></option>
         </select>
         <p class="description"><?php
             _e(
@@ -150,13 +176,31 @@ class Settings
         $current_title = isset($options['wp_duplicate_copy_title']) ? $options['wp_duplicate_copy_title'] : 'Copy of ';
         ?>
         <input type="text" name="<?php
-        echo $this->option_name; ?>[wp_duplicate_copy_title]" id="wp_duplicate_copy_title" class="wpdc-input regular-text"
+        echo $this->option_name; ?>[wp_duplicate_copy_title]" id="wp_duplicate_copy_title"
+               class="wpdc-input regular-text"
                value="<?php
                echo esc_attr(
                    $current_title
                ); ?>"/>
         <p class="description"><?php
-            _e('Text to add before the original title.', 'wp-duplicate'); ?></p>
+            _e('Text to add before the original title. A space will be automatically added.', 'wp-duplicate'); ?></p>
+        <?php
+    }
+
+    public function suffixFieldCallback()
+    {
+        $options        = get_option($this->option_name, array());
+        $current_suffix = isset($options['wp_duplicate_copy_suffix']) ? $options['wp_duplicate_copy_suffix'] : '';
+        ?>
+        <input type="text" name="<?php
+        echo $this->option_name; ?>[wp_duplicate_copy_suffix]" id="wp_duplicate_copy_suffix"
+               class="wpdc-input regular-text"
+               value="<?php
+               echo esc_attr(
+                   $current_suffix
+               ); ?>"/>
+        <p class="description"><?php
+            _e('Text to add after the original title. A space will be automatically added.', 'wp-duplicate'); ?></p>
         <?php
     }
 
@@ -222,58 +266,100 @@ class Settings
         ?>
         <div class="wpdc-settings-grid">
             <div class="wpdc-settings-section">
-                <h4><?php _e('Post Types', 'wp-duplicate'); ?></h4>
+                <h4><?php
+                    _e('Post Types', 'wp-duplicate'); ?></h4>
                 <fieldset>
                     <label for="wp_duplicate_enable_posts">
-                        <input type="checkbox" name="<?php echo $this->option_name; ?>[wp_duplicate_enable_posts]" 
-                               id="wp_duplicate_enable_posts" value="1" 
-                               <?php checked(isset($options['wp_duplicate_enable_posts']) ? $options['wp_duplicate_enable_posts'] : '1', '1'); ?> />
-                        <?php _e('Enable for Posts', 'wp-duplicate'); ?>
+                        <input type="checkbox" name="<?php
+                        echo $this->option_name; ?>[wp_duplicate_enable_posts]"
+                               id="wp_duplicate_enable_posts" value="1"
+                            <?php
+                            checked(
+                                isset($options['wp_duplicate_enable_posts']) ? $options['wp_duplicate_enable_posts'] : '1',
+                                '1'
+                            ); ?> />
+                        <?php
+                        _e('Enable for Posts', 'wp-duplicate'); ?>
                     </label>
                     <br/>
                     <label for="wp_duplicate_enable_pages">
-                        <input type="checkbox" name="<?php echo $this->option_name; ?>[wp_duplicate_enable_pages]" 
-                               id="wp_duplicate_enable_pages" value="1" 
-                               <?php checked(isset($options['wp_duplicate_enable_pages']) ? $options['wp_duplicate_enable_pages'] : '1', '1'); ?> />
-                        <?php _e('Enable for Pages', 'wp-duplicate'); ?>
+                        <input type="checkbox" name="<?php
+                        echo $this->option_name; ?>[wp_duplicate_enable_pages]"
+                               id="wp_duplicate_enable_pages" value="1"
+                            <?php
+                            checked(
+                                isset($options['wp_duplicate_enable_pages']) ? $options['wp_duplicate_enable_pages'] : '1',
+                                '1'
+                            ); ?> />
+                        <?php
+                        _e('Enable for Pages', 'wp-duplicate'); ?>
                     </label>
                     <br/>
                     <label for="wp_duplicate_enable_custom_post_types">
-                        <input type="checkbox" name="<?php echo $this->option_name; ?>[wp_duplicate_enable_custom_post_types]" 
-                               id="wp_duplicate_enable_custom_post_types" value="1" 
-                               <?php checked(isset($options['wp_duplicate_enable_custom_post_types']) ? $options['wp_duplicate_enable_custom_post_types'] : '1', '1'); ?> />
-                        <?php _e('Enable for Custom Post Types', 'wp-duplicate'); ?>
+                        <input type="checkbox" name="<?php
+                        echo $this->option_name; ?>[wp_duplicate_enable_custom_post_types]"
+                               id="wp_duplicate_enable_custom_post_types" value="1"
+                            <?php
+                            checked(
+                                isset($options['wp_duplicate_enable_custom_post_types']) ? $options['wp_duplicate_enable_custom_post_types'] : '1',
+                                '1'
+                            ); ?> />
+                        <?php
+                        _e('Enable for Custom Post Types', 'wp-duplicate'); ?>
                     </label>
                 </fieldset>
             </div>
 
             <div class="wpdc-settings-section">
-                <h4><?php _e('Taxonomies', 'wp-duplicate'); ?></h4>
+                <h4><?php
+                    _e('Taxonomies', 'wp-duplicate'); ?></h4>
                 <fieldset>
                     <label for="wp_duplicate_enable_categories">
-                        <input type="checkbox" name="<?php echo $this->option_name; ?>[wp_duplicate_enable_categories]" 
-                               id="wp_duplicate_enable_categories" value="1" 
-                               <?php checked(isset($options['wp_duplicate_enable_categories']) ? $options['wp_duplicate_enable_categories'] : '1', '1'); ?> />
-                        <?php _e('Enable for Categories', 'wp-duplicate'); ?>
+                        <input type="checkbox" name="<?php
+                        echo $this->option_name; ?>[wp_duplicate_enable_categories]"
+                               id="wp_duplicate_enable_categories" value="1"
+                            <?php
+                            checked(
+                                isset($options['wp_duplicate_enable_categories']) ? $options['wp_duplicate_enable_categories'] : '1',
+                                '1'
+                            ); ?> />
+                        <?php
+                        _e('Enable for Categories', 'wp-duplicate'); ?>
                     </label>
                     <br/>
                     <label for="wp_duplicate_enable_tags">
-                        <input type="checkbox" name="<?php echo $this->option_name; ?>[wp_duplicate_enable_tags]" 
-                               id="wp_duplicate_enable_tags" value="1" 
-                               <?php checked(isset($options['wp_duplicate_enable_tags']) ? $options['wp_duplicate_enable_tags'] : '1', '1'); ?> />
-                        <?php _e('Enable for Tags', 'wp-duplicate'); ?>
+                        <input type="checkbox" name="<?php
+                        echo $this->option_name; ?>[wp_duplicate_enable_tags]"
+                               id="wp_duplicate_enable_tags" value="1"
+                            <?php
+                            checked(
+                                isset($options['wp_duplicate_enable_tags']) ? $options['wp_duplicate_enable_tags'] : '1',
+                                '1'
+                            ); ?> />
+                        <?php
+                        _e('Enable for Tags', 'wp-duplicate'); ?>
                     </label>
                     <br/>
                     <label for="wp_duplicate_enable_custom_taxonomies">
-                        <input type="checkbox" name="<?php echo $this->option_name; ?>[wp_duplicate_enable_custom_taxonomies]" 
-                               id="wp_duplicate_enable_custom_taxonomies" value="1" 
-                               <?php checked(isset($options['wp_duplicate_enable_custom_taxonomies']) ? $options['wp_duplicate_enable_custom_taxonomies'] : '1', '1'); ?> />
-                        <?php _e('Enable for Custom Taxonomies', 'wp-duplicate'); ?>
+                        <input type="checkbox" name="<?php
+                        echo $this->option_name; ?>[wp_duplicate_enable_custom_taxonomies]"
+                               id="wp_duplicate_enable_custom_taxonomies" value="1"
+                            <?php
+                            checked(
+                                isset($options['wp_duplicate_enable_custom_taxonomies']) ? $options['wp_duplicate_enable_custom_taxonomies'] : '1',
+                                '1'
+                            ); ?> />
+                        <?php
+                        _e('Enable for Custom Taxonomies', 'wp-duplicate'); ?>
                     </label>
                 </fieldset>
             </div>
         </div>
-        <p class="description"><?php _e('Select which content types should have duplicate functionality enabled. Unchecked items will not show duplicate buttons.', 'wp-duplicate'); ?></p>
+        <p class="description"><?php
+            _e(
+                'Select which content types should have duplicate functionality enabled. Unchecked items will not show duplicate buttons.',
+                'wp-duplicate'
+            ); ?></p>
         <?php
     }
 

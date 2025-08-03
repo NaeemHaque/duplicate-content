@@ -42,7 +42,7 @@ if (!defined('ABSPATH')) {
             <ul>
                 <li>
                     <span class="dashicons dashicons-arrow-right-alt"></span>
-                    <?php _e('Title (with prefix)', 'wp-duplicate'); ?>
+                    <?php _e('Title (with prefix and suffix - spaces automatically added)', 'wp-duplicate'); ?>
                 </li>
                 <li>
                     <span class="dashicons dashicons-arrow-right-alt"></span>
@@ -81,7 +81,7 @@ if (!defined('ABSPATH')) {
                 </li>
                 <li>
                     <span class="dashicons dashicons-arrow-right-alt"></span>
-                    <?php _e('Title prefix for duplicated items', 'wp-duplicate'); ?>
+                    <?php _e('Title prefix and suffix for duplicated items', 'wp-duplicate'); ?>
                 </li>
                 <li>
                     <span class="dashicons dashicons-arrow-right-alt"></span>

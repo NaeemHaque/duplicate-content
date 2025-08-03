@@ -11,6 +11,7 @@ class Activator
             $default_options = array(
                 'wp_duplicate_copy_status'      => 'draft',
                 'wp_duplicate_copy_title'       => 'Copy of ',
+                'wp_duplicate_copy_suffix'      => '',
                 'wp_duplicate_copy_meta'        => '1',
                 'wp_duplicate_copy_taxonomies'  => '1',
                 'wp_duplicate_copy_comments'    => '',
