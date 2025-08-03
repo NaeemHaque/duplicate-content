@@ -45,7 +45,6 @@
                 $submitButton.val(originalText).prop('disabled', false);
             }, 2000);
         });
-
     });
 
 })(jQuery);

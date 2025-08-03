@@ -104,7 +104,7 @@ class AdminController
 
     public function addDuplicatePostAction($actions, $post)
     {
-        if ($this->canUserDuplicate() && $this->isDuplicatablePostType($post->post_type)) {
+        if ($this->canUserDuplicate() && $this->isDuplicatablePostType($post->post_type) && $this->isContentTypeEnabled($post->post_type)) {
             $actions['duplicate'] = sprintf(
                 '<a href="%s" class="wpdc-duplicate-action" data-post-id="%d" data-post-type="%s">%s</a>',
                 wp_nonce_url(
@@ -122,7 +122,7 @@ class AdminController
 
     public function addDuplicateTaxonomyAction($actions, $term)
     {
-        if ($this->canUserDuplicate()) {
+        if ($this->canUserDuplicate() && $this->isTaxonomyEnabled($term->taxonomy)) {
             $actions['duplicate'] = sprintf(
                 '<a href="%s" class="wpdc-duplicate-action" data-term-id="%d" data-taxonomy="%s">%s</a>',
                 wp_nonce_url(
@@ -250,6 +250,34 @@ class AdminController
         $duplicatable_types = array_merge($duplicatable_types, $custom_post_types);
 
         return in_array($post_type, $duplicatable_types);
+    }
+
+    private function isContentTypeEnabled($content_type)
+    {
+        $options = get_option('wp_duplicate_options', array());
+
+        switch ($content_type) {
+            case 'post':
+                return isset($options['wp_duplicate_enable_posts']) ? $options['wp_duplicate_enable_posts'] === '1' : true;
+            case 'page':
+                return isset($options['wp_duplicate_enable_pages']) ? $options['wp_duplicate_enable_pages'] === '1' : true;
+            default:
+                return isset($options['wp_duplicate_enable_custom_post_types']) ? $options['wp_duplicate_enable_custom_post_types'] === '1' : true;
+        }
+    }
+
+    private function isTaxonomyEnabled($taxonomy)
+    {
+        $options = get_option('wp_duplicate_options', array());
+
+        switch ($taxonomy) {
+            case 'category':
+                return isset($options['wp_duplicate_enable_categories']) ? $options['wp_duplicate_enable_categories'] === '1' : true;
+            case 'post_tag':
+                return isset($options['wp_duplicate_enable_tags']) ? $options['wp_duplicate_enable_tags'] === '1' : true;
+            default:
+                return isset($options['wp_duplicate_enable_custom_taxonomies']) ? $options['wp_duplicate_enable_custom_taxonomies'] === '1' : true;
+        }
     }
 
     public function displayDashboard()

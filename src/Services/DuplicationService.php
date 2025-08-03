@@ -147,6 +147,12 @@ class DuplicationService
 
     private function copyAttachments($original_id, $new_id)
     {
+        $copy_attachments = $this->settings->get('wp_duplicate_copy_attachments', '');
+        
+        if ($copy_attachments !== '1') {
+            return;
+        }
+
         $attachments = get_attached_media('', $original_id);
         foreach ($attachments as $attachment) {
             $attachment_data   = array(
