@@ -1,6 +1,8 @@
-=== WP Duplicate ===
+=== WP Duplicate - Duplicate any content ===
 Contributors: naeemhaque
-Tags: duplicate, wp duplicate, duplicate post, duplicate page, posts, pages, categories, tags, custom post types, taxonomy, clone, copy, duplicate category, duplicate tag, duplicate taxonomy,  duplicate custom post type
+Plugin URI: https://github.com/naeemhaque/wp-duplicate
+Author URI: https://profiles.wordpress.org/naeemhaque/
+Tags: duplicate, clone, copy, post, page, custom post type
 Requires at least: 5.0
 Tested up to: 6.4
 Requires PHP: 7.4
@@ -149,71 +151,11 @@ The plugin doesn't automatically undo duplications, but you can easily delete du
 = 1.0.0 =
 Initial release of WP Duplicate. This version includes all core functionality for duplicating posts, pages, categories, tags, and custom post types.
 
-== Developer Information ==
-
-= Hooks and Filters =
-
-The plugin provides various hooks for customization:
-
-```php
-// Customize admin menu
-add_filter('wp_duplicate_admin_menu_items', 'customize_menu_items');
-
-// Modify duplication behavior
-add_action('wp_duplicate_before_duplicate', 'custom_before_duplicate');
-add_action('wp_duplicate_after_duplicate', 'custom_after_duplicate');
-```
-
-= Code Structure =
-
-The plugin follows MVC architecture with proper namespacing:
-
-```
-src/
-├── Plugin.php                # Main plugin class
-├── Controllers/              # Controller classes
-├── Models/                   # Data models
-├── Services/                 # Business logic
-├── Views/                    # Template files
-└── Helpers/                  # Utility classes
-```
-
-= Contributing =
-
-We welcome contributions! Please visit our GitHub repository to submit issues, feature requests, or pull requests.
-
 == Support ==
 
-= Documentation =
-* Check the Help section in the plugin
-* Visit our documentation website
-* Read the inline code comments
-
 = Support Channels =
-* **GitHub Issues**: Report bugs and request features
 * **WordPress.org Forums**: Community support
-* **Email Support**: Direct support for premium users
-
-= Development =
-* **GitHub Repository**: [https://github.com/NaeemHaque/wp-duplicate](https://github.com/NaeemHaque/wp-duplicate)
-* **Issue Tracker**: Report bugs and feature requests
-* **Pull Requests**: Submit code contributions
-
-== Credits ==
-
-* **Developer**: Golam Sarwer
-* **LinkedIn**: [https://www.linkedin.com/in/golam-sarwer-8626101a3/](https://www.linkedin.com/in/golam-sarwer-8626101a3/)
-* **Donations**: [https://buymeacoffee.com/naeemhaque](https://buymeacoffee.com/naeemhaque)
 
 == License ==
 
 This plugin is licensed under the GPL v2 or later.
-
-== Donate ==
-
-If you find this plugin helpful, please consider supporting its development:
-
-* [Buy Me a Coffee](https://buymeacoffee.com/naeemhaque)
-* [GitHub Sponsors](https://github.com/sponsors/naeemhaque)
-
-Your support helps us maintain and improve this plugin for the WordPress community.

@@ -2,20 +2,19 @@
 
 /**
  * Plugin Name: WP Duplicate
- * Plugin URI: https://github.com/NaeemHaque/wp-duplicate.git
  * Description: Duplicate your posts, pages, categories, tags, CPTs, and other taxonomies with just a single click.
  * Version: 1.0.0
- * Author: Golam Sarwer
- * Author URI: https://www.linkedin.com/in/golam-sarwer-8626101a3/
- * Donate link: https://buymeacoffee.com/naeemhaque
- * License: GPL-2.0+
- * License URI: http://www.gnu.org/licenses/gpl-2.0.txt
+ * Author: Naeem Haque
+ * Author URI: https://profiles.wordpress.org/naeemhaque/
+ * Plugin URI: https://github.com/naeemhaque/wp-duplicate
+ * License: GPL v2 or later
+ * License URI: http://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain: wp-duplicate
  * Domain Path: /languages
  */
 
-if (!defined('WPINC')) {
-    die;
+if (!defined('ABSPATH')) {
+    exit;
 }
 
 define('WP_DUPLICATE_VERSION', '1.0.0');
