@@ -116,7 +116,7 @@ class Settings
         $current_status = isset($options['wp_duplicate_copy_status']) ? $options['wp_duplicate_copy_status'] : 'draft';
         ?>
         <select name="<?php
-        echo $this->option_name; ?>[wp_duplicate_copy_status]" id="wp_duplicate_copy_status">
+        echo $this->option_name; ?>[wp_duplicate_copy_status]" class="wpdc-select" id="wp_duplicate_copy_status">
             <option value="draft" <?php
             selected(
                 $current_status,
@@ -150,7 +150,7 @@ class Settings
         $current_title = isset($options['wp_duplicate_copy_title']) ? $options['wp_duplicate_copy_title'] : 'Copy of ';
         ?>
         <input type="text" name="<?php
-        echo $this->option_name; ?>[wp_duplicate_copy_title]" id="wp_duplicate_copy_title" class="regular-text"
+        echo $this->option_name; ?>[wp_duplicate_copy_title]" id="wp_duplicate_copy_title" class="wpdc-input regular-text"
                value="<?php
                echo esc_attr(
                    $current_title

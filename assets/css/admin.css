@@ -217,27 +217,53 @@
 }
 
 /* Settings Page Styles */
-.wpdc-settings-title {
-    margin-bottom: 20px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.wpdc-settings-title .dashicons {
-    color: #0073aa;
-    font-size: 24px;
-}
 
 .wpdc-settings-container {
-    margin-top: 20px;
+    background: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 20px;
 }
 
-#wpdc-settings-form {
-    background: #fff;
-    border: 1px solid #ccd0d4;
+.wpdc-select {
+    width: 100%;
+    max-width: 100% !important;
+    height: 40px;
+    border: 1px solid #ccc;
     border-radius: 8px;
-    padding: 30px;
+    padding: 8px 12px;
+    font-size: 14px;
+    color: #333;
+    cursor: pointer;
+    appearance: none;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 6"><path fill="black" d="M10 0L5 6 0 0z"/></svg>');
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 8px;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.03);
+}
+
+.wpdc-select:focus {
+    border-color: #667eea !important;
+    color: #333 !important;
+    box-shadow: 0 0 0 1px #667eea !important;
+}
+
+.wpdc-input {
+    width: 100%;
+    height: 40px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 8px 12px;
+    font-size: 14px;
+    color: #333;
+    transition: all 0.3s ease;
+}
+.wpdc-input:focus {
+    border-color: #667eea !important;
+    color: #333 !important;
+    box-shadow: 0 0 0 1px #667eea !important;
 }
 
 .wpdc-settings-actions {
@@ -247,15 +273,11 @@
     display: flex;
     gap: 10px;
     align-items: center;
+    justify-content: end;
 }
 
-.wpdc-save-button {
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-    padding: 8px 16px;
-    font-size: 14px;
-    font-weight: 500;
+.form-table th {
+    width: auto;
 }
 
 
@@ -390,9 +412,6 @@
         align-items: stretch;
     }
 
-    .wpdc-save-button {
-        justify-content: center;
-    }
 }
 
 @media (max-width: 480px) {
