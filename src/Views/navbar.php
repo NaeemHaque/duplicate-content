@@ -8,7 +8,7 @@ $current_page = $_GET['page'] ?? 'wp-duplicate';
 <div class="wpdc-navbar">
     <div class="wpdc-navbar-container">
         <div class="wpdc-navbar-brand">
-            <img src="<?php echo plugin_dir_url(dirname(dirname(__FILE__))) . 'assets/images/logo.svg'; ?>" alt="WP Duplicate" class="wpdc-navbar-logo">
+            <img src="<?php echo plugin_dir_url(dirname(dirname(__FILE__))) . 'assets/images/icon.png'; ?>" alt="WP Duplicate" class="wpdc-navbar-logo" style="width: 40px">
             <span class="wpdc-navbar-title"><?php _e('WP Duplicate', 'wp-duplicate'); ?></span>
         </div>
         

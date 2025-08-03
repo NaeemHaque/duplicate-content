@@ -50,7 +50,7 @@ class AdminController
             'manage_options',
             'wp-duplicate',
             [$this, 'displayDashboard'],
-            'dashicons-admin-page',
+            plugin_dir_url(dirname(dirname(__FILE__))) . 'assets/images/icon.svg',
             30
         );
 
