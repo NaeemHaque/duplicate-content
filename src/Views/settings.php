@@ -4,7 +4,7 @@ if (!defined('ABSPATH')) {
 }
 
 if (!current_user_can('manage_options')) {
-    wp_die(__('You do not have sufficient permissions to access this page.', 'wp-duplicate'));
+    wp_die(esc_html__('You do not have sufficient permissions to access this page.', 'wp-duplicate'));
 }
 ?>
 
@@ -14,14 +14,6 @@ if (!current_user_can('manage_options')) {
     <p class="wpdc-welcome"><?php esc_html_e('Settings', 'wp-duplicate'); ?></p>
 
     <?php
-    if (isset($_GET['settings-updated']) && $_GET['settings-updated'] === 'true') {
-        ?>
-        <div class="notice notice-success is-dismissible">
-            <p><?php esc_html_e('Settings saved successfully!', 'wp-duplicate'); ?></p>
-        </div>
-        <?php
-    }
-
     // Check for any settings errors
     $settings_errors = get_settings_errors('wp_duplicate_options');
     if (!empty($settings_errors)) {

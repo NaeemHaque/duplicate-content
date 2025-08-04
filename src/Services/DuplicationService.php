@@ -21,22 +21,16 @@ class DuplicationService
     {
         $post_id = absint($post_id);
         if (empty($post_id)) {
-            error_log('WP Duplicate: Invalid post ID provided');
-
             return false;
         }
 
         $post = get_post($post_id);
         if ( ! $post || is_wp_error($post)) {
-            error_log('WP Duplicate: Post not found for ID ' . $post_id);
-
             return false;
         }
 
         // Check if user can edit this post type
         if ( ! current_user_can('edit_posts') || ! current_user_can('edit_post', $post_id)) {
-            error_log('WP Duplicate: User lacks permission to duplicate post ID ' . $post_id);
-
             return false;
         }
 
@@ -68,10 +62,6 @@ class DuplicationService
         $new_post_id = wp_insert_post($new_post_data, true);
 
         if (is_wp_error($new_post_id) || ! $new_post_id) {
-            error_log(
-                'WP Duplicate: Failed to duplicate post ID ' . $post_id . ' - ' . $new_post_id->get_error_message()
-            );
-
             return false;
         }
 
@@ -104,28 +94,20 @@ class DuplicationService
         $term_id = absint($term_id);
 
         if (empty($term_id)) {
-            error_log('WP Duplicate: Invalid term ID provided');
-
             return false;
         }
 
         if ( ! taxonomy_exists($taxonomy)) {
-            error_log('WP Duplicate: Invalid taxonomy ' . $taxonomy);
-
             return false;
         }
 
         $term = get_term($term_id, $taxonomy);
 
         if ( ! $term || is_wp_error($term)) {
-            error_log('WP Duplicate: Term not found for ID ' . $term_id . ' in taxonomy ' . $taxonomy);
-
             return false;
         }
 
         if ( ! current_user_can('manage_categories')) {
-            error_log('WP Duplicate: User lacks permission to duplicate taxonomy terms');
-
             return false;
         }
 
@@ -152,11 +134,6 @@ class DuplicationService
         $new_term = wp_insert_term(wp_strip_all_tags($formatted_title), $taxonomy, $new_term_data);
 
         if (is_wp_error($new_term)) {
-            error_log(
-                'WP Duplicate: Failed to duplicate term ID ' . $term_id . ' in taxonomy ' . $taxonomy . ' - ' . $new_term->get_error_message(
-                )
-            );
-
             return false;
         }
 
@@ -249,11 +226,9 @@ class DuplicationService
             $terms = wp_get_object_terms($original_id, $taxonomy, ['fields' => 'ids']);
             if ( ! is_wp_error($terms) && is_array($terms)) {
                 $result = wp_set_object_terms($new_id, $terms, $taxonomy);
-                if (is_wp_error($result)) {
-                    error_log(
-                        'WP Duplicate: Failed to copy taxonomy ' . $taxonomy . ' - ' . $result->get_error_message()
-                    );
-                }
+                            if (is_wp_error($result)) {
+                // Taxonomy copy failed silently
+            }
             }
         }
 
@@ -318,7 +293,7 @@ class DuplicationService
 
             $result = wp_insert_comment($comment_data);
             if ( ! $result) {
-                error_log('WP Duplicate: Failed to copy comment from post ' . $original_id);
+                // Comment copy failed silently
             }
         }
 
@@ -365,7 +340,6 @@ class DuplicationService
 
             $new_attachment_id = wp_insert_post($attachment_data, true);
             if (is_wp_error($new_attachment_id) || ! $new_attachment_id) {
-                error_log('WP Duplicate: Failed to copy attachment ' . $attachment->ID);
                 continue;
             }
 
@@ -439,7 +413,7 @@ class DuplicationService
         $title  = trim(sanitize_text_field($title));
 
         if (empty($title)) {
-            $title = __('Untitled', 'wp-duplicate');
+            $title = esc_html__('Untitled', 'wp-duplicate');
         }
 
         $formatted_title = $title;

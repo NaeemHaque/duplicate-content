@@ -16,22 +16,14 @@ class Plugin
     private function init()
     {
         $this->loadDependencies();
-        $this->setLocale();
         $this->defineAdminHooks();
     }
 
     private function loadDependencies()
     {
-        require_once plugin_dir_path(dirname(__FILE__)) . 'src/Helpers/I18n.php';
         require_once plugin_dir_path(dirname(__FILE__)) . 'src/Controllers/AdminController.php';
         require_once plugin_dir_path(dirname(__FILE__)) . 'src/Services/DuplicationService.php';
         require_once plugin_dir_path(dirname(__FILE__)) . 'src/Models/Settings.php';
-    }
-
-    private function setLocale()
-    {
-        $i18n = new Helpers\I18n();
-        add_action('plugins_loaded', [$i18n, 'loadPluginTextdomain']);
     }
 
     private function defineAdminHooks()

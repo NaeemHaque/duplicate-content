@@ -20,14 +20,14 @@ class Settings
 
         add_settings_section(
             'wp_duplicate_general_section',
-            __('General Settings', 'wp-duplicate'),
+            esc_html__('General Settings', 'wp-duplicate'),
             [$this, 'generalSectionCallback'],
             'wp_duplicate_settings'
         );
 
         add_settings_field(
             'wp_duplicate_copy_status',
-            __('Default Status', 'wp-duplicate'),
+            esc_html__('Default Status', 'wp-duplicate'),
             [$this, 'statusFieldCallback'],
             'wp_duplicate_settings',
             'wp_duplicate_general_section'
@@ -35,7 +35,7 @@ class Settings
 
         add_settings_field(
             'wp_duplicate_copy_title',
-            __('Title Prefix', 'wp-duplicate'),
+            esc_html__('Title Prefix', 'wp-duplicate'),
             [$this, 'titleFieldCallback'],
             'wp_duplicate_settings',
             'wp_duplicate_general_section'
@@ -43,7 +43,7 @@ class Settings
 
         add_settings_field(
             'wp_duplicate_copy_suffix',
-            __('Title Suffix', 'wp-duplicate'),
+            esc_html__('Title Suffix', 'wp-duplicate'),
             [$this, 'suffixFieldCallback'],
             'wp_duplicate_settings',
             'wp_duplicate_general_section'
@@ -51,7 +51,7 @@ class Settings
 
         add_settings_field(
             'wp_duplicate_copy_options',
-            __('Copy Options', 'wp-duplicate'),
+            esc_html__('Copy Options', 'wp-duplicate'),
             [$this, 'copyOptionsFieldCallback'],
             'wp_duplicate_settings',
             'wp_duplicate_general_section'
@@ -59,7 +59,7 @@ class Settings
 
         add_settings_field(
             'wp_duplicate_content_types',
-            __('Content Types', 'wp-duplicate'),
+            esc_html__('Content Types', 'wp-duplicate'),
             [$this, 'contentTypesFieldCallback'],
             'wp_duplicate_settings',
             'wp_duplicate_general_section'
@@ -67,7 +67,7 @@ class Settings
 
         add_settings_field(
             'wp_duplicate_permissions',
-            __('User Permissions', 'wp-duplicate'),
+            esc_html__('User Permissions', 'wp-duplicate'),
             [$this, 'permissionsFieldCallback'],
             'wp_duplicate_settings',
             'wp_duplicate_general_section'
@@ -372,10 +372,9 @@ class Settings
                            name="<?php echo esc_attr($this->option_name); ?>[wp_duplicate_permissions][]"
                            id="wp_duplicate_role_<?php echo esc_attr($role_key); ?>"
                            value="<?php echo esc_attr($role_key); ?>"
-                        <?php echo $checked; ?>
+                        <?php echo esc_attr($checked); ?>
                     />
-                    <?php
-                    echo esc_html($role_name); ?>
+                    <?php echo esc_html($role_name); ?>
                 </label><br/>
                 <?php
             }
@@ -398,4 +397,4 @@ class Settings
 
         return update_option($this->option_name, $options);
     }
-} 
+}

@@ -3,7 +3,8 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-$current_page = isset($_GET['page']) ? sanitize_text_field($_GET['page']) : 'wp-duplicate';
+// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Reading admin page parameter for navigation display only
+$current_page = isset($_GET['page']) ? sanitize_text_field(wp_unslash($_GET['page'])) : 'wp-duplicate';
 
 $allowed_pages = [
     'wp-duplicate',
