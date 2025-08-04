@@ -2,6 +2,10 @@
 
 namespace WPDuplicate\Helpers;
 
+if ( ! defined('ABSPATH')) {
+    exit;
+}
+
 class I18n
 {
     public function loadPluginTextdomain()

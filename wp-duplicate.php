@@ -2,11 +2,11 @@
 
 /**
  * Plugin Name: WP Duplicate
+ * Plugin URI: https://github.com/naeemhaque/wp-duplicate
  * Description: Duplicate your posts, pages, categories, tags, CPTs, and other taxonomies with just a single click.
  * Version: 1.0.0
  * Author: Naeem Haque
  * Author URI: https://profiles.wordpress.org/naeemhaque/
- * Plugin URI: https://github.com/naeemhaque/wp-duplicate
  * License: GPL v2 or later
  * License URI: http://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain: wp-duplicate
@@ -32,7 +32,11 @@ spl_autoload_register(function ($class) {
     $relative_class = substr($class, $len);
     $file = $base_dir . str_replace('\\', '/', $relative_class) . '.php';
 
-    if (file_exists($file)) {
+    // Security: Validate file path to prevent directory traversal
+    $real_file = realpath($file);
+    $real_base = realpath($base_dir);
+    
+    if ($real_file && $real_base && strpos($real_file, $real_base) === 0 && file_exists($file)) {
         require $file;
     }
 });

@@ -22,7 +22,6 @@ class Plugin
 
     private function loadDependencies()
     {
-        require_once plugin_dir_path(dirname(__FILE__)) . 'src/Helpers/Loader.php';
         require_once plugin_dir_path(dirname(__FILE__)) . 'src/Helpers/I18n.php';
         require_once plugin_dir_path(dirname(__FILE__)) . 'src/Controllers/AdminController.php';
         require_once plugin_dir_path(dirname(__FILE__)) . 'src/Services/DuplicationService.php';
