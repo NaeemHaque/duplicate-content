@@ -2,7 +2,7 @@
 Contributors: naeemhaque
 Plugin URI: https://github.com/naeemhaque/wp-duplicate
 Author URI: https://profiles.wordpress.org/naeemhaque/
-Tags: duplicate, clone, copy, post, page, custom post type
+Tags: duplicate, clone, copy, post, page
 Requires at least: 5.0
 Tested up to: 6.8
 Requires PHP: 7.4

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Plugin Name: WP Duplicate
+ * Plugin Name: WP Duplicate - Duplicate any content
  * Plugin URI: https://github.com/naeemhaque/wp-duplicate
  * Description: Duplicate your posts, pages, categories, tags, CPTs, and other taxonomies with just a single click.
  * Version: 1.0.0
