@@ -1,4 +1,4 @@
-# WP Duplicate
+# Duplicate Content
 
 A powerful WordPress plugin that allows you to duplicate posts, pages, categories, tags, custom post types, and other taxonomies with just a single click.
 
@@ -32,13 +32,13 @@ A powerful WordPress plugin that allows you to duplicate posts, pages, categorie
 
 ### Method 2: Manual Installation
 1. Download and extract the plugin files
-2. Upload the `wp-duplicate` folder to `/wp-content/plugins/`
+2. Upload the `duplicate-content` folder to `/wp-content/plugins/`
 3. Go to **WordPress Admin → Plugins**
-4. Find "WP Duplicate" and click **Activate**
+4. Find "Duplicate Content" and click **Activate**
 
 ## 🎯 Usage
 
-After activation, you'll find a new menu item "WP Duplicate" in your WordPress admin sidebar with three submenus:
+After activation, you'll find a new menu item "Duplicate Content" in your WordPress admin sidebar with three submenus:
 
 ### Dashboard
 - Main overview of the plugin
@@ -64,8 +64,8 @@ After activation, you'll find a new menu item "WP Duplicate" in your WordPress a
 ## 📁 Plugin Structure
 
 ```
-wp-duplicate/
-├── wp-dubplicate.php              # Main plugin file
+duplicate-content/
+├── duplicate-content.php              # Main plugin file
 ├── index.php                      # Security file
 ├── uninstall.php                  # Cleanup on uninstall
 ├── LICENSE.txt                    # License information
@@ -78,7 +78,7 @@ wp-duplicate/
 │   └── js/
 │       └── admin.js              # Admin scripts (1.5KB)
 ├── languages/                     # Translation files
-│   └── wp-duplicate.pot          # Translation template
+│   └── duplicate-content.pot      # Translation template
 └── src/                          # Source code (MVC structure)
     ├── Plugin.php                # Main plugin class (Singleton)
     ├── Controllers/              # Controller classes
@@ -92,9 +92,7 @@ wp-duplicate/
     │   ├── settings.php          # Settings page template (402B)
     │   └── help.php              # Help page template (3.7KB)
     └── Helpers/                  # Helper classes
-        ├── I18n.php              # Internationalization helper
-        ├── Loader.php            # Asset loader helper (1.6KB)
-        ├── Activator.php          # Plugin activation handler
+        ├── Activator.php         # Plugin activation handler
         └── Deactivator.php       # Plugin deactivation handler
 ```
 
@@ -152,7 +150,7 @@ The plugin follows a **Model-View-Controller (MVC)** pattern with proper namespa
 
 - **PSR-4** autoloading
 - **WordPress coding standards**
-- **Proper namespacing** (`WPDuplicate\`)
+- **Proper namespacing** (`DuplicateContent\`)
 - **Documentation** for all public methods
 
 ### Hooks and Filters
@@ -161,24 +159,24 @@ The plugin provides various hooks for customization:
 
 ```php
 // Example: Customize admin menu
-add_filter('wp_duplicate_admin_menu_items', 'customize_menu_items');
+add_filter('duplicate_content_admin_menu_items', 'customize_menu_items');
 
 // Example: Modify duplication behavior
-add_action('wp_duplicate_before_duplicate', 'custom_before_duplicate');
-add_action('wp_duplicate_after_duplicate', 'custom_after_duplicate');
+add_action('duplicate_content_before_duplicate', 'custom_before_duplicate');
+add_action('duplicate_content_after_duplicate', 'custom_after_duplicate');
 ```
 
 ## 🌐 Internationalization
 
 The plugin is fully translatable:
 
-- **Text Domain**: `wp-duplicate`
+- **Text Domain**: `duplicate-content`
 - **Translation Files**: Located in `/languages/`
-- **Template**: `wp-duplicate.pot` for translators
+- **Template**: `duplicate-content.pot` for translators
 
 ### Adding Translations
 
-1. Copy `languages/wp-duplicate.pot` to your language
+1. Copy `languages/duplicate-content.pot` to your language
 2. Translate strings using Poedit or similar tool
 3. Generate `.mo` file
 4. Place in `languages/` directory

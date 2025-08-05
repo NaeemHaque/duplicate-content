@@ -4,7 +4,7 @@ if ( ! defined('WP_UNINSTALL_PLUGIN')) {
     exit;
 }
 
-delete_option('wp_duplicate_options');
+delete_option('duplicate_content_options');
 
 global $wpdb;
 

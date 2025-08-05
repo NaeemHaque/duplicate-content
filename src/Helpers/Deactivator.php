@@ -1,6 +1,6 @@
 <?php
 
-namespace WPDuplicate\Helpers;
+namespace DuplicateContent\Helpers;
 
 if ( ! defined('ABSPATH')) {
     exit;
@@ -11,7 +11,7 @@ class Deactivator
     public static function deactivate()
     {
         // Note: Consider keeping user settings on deactivation
-        // delete_option('wp_duplicate_options');
+        // delete_option('duplicate_content_options');
 
         self::cleanupTransients();
     }

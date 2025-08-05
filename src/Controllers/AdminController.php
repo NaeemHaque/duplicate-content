@@ -1,9 +1,9 @@
 <?php
 
-namespace WPDuplicate\Controllers;
+namespace DuplicateContent\Controllers;
 
-use WPDuplicate\Services\DuplicationService;
-use WPDuplicate\Models\Settings;
+use DuplicateContent\Services\DuplicationService;
+use DuplicateContent\Models\Settings;
 
 // Prevent direct access
 if ( ! defined('ABSPATH')) {
@@ -50,39 +50,39 @@ class AdminController
     public function addAdminMenu()
     {
         add_menu_page(
-            esc_html__('WP Duplicate', 'wp-duplicate'),
-            esc_html__('WP Duplicate', 'wp-duplicate'),
+            esc_html__('Duplicate Content', 'duplicate-content'),
+            esc_html__('Duplicate Content', 'duplicate-content'),
             'manage_options',
-            'wp-duplicate',
+            'duplicate-content',
             [$this, 'displayDashboard'],
             plugin_dir_url(dirname(dirname(__FILE__))) . 'assets/images/icon.svg',
             30
         );
 
         add_submenu_page(
-            'wp-duplicate',
-            esc_html__('Dashboard', 'wp-duplicate'),
-            esc_html__('Dashboard', 'wp-duplicate'),
+            'duplicate-content',
+                            esc_html__('Dashboard', 'duplicate-content'),
+                esc_html__('Dashboard', 'duplicate-content'),
             'manage_options',
-            'wp-duplicate',
+            'duplicate-content',
             [$this, 'displayDashboard']
         );
 
         add_submenu_page(
-            'wp-duplicate',
-            esc_html__('Settings', 'wp-duplicate'),
-            esc_html__('Settings', 'wp-duplicate'),
+            'duplicate-content',
+                            esc_html__('Settings', 'duplicate-content'),
+                esc_html__('Settings', 'duplicate-content'),
             'manage_options',
-            'wp-duplicate-settings',
+            'duplicate-content-settings',
             [$this, 'displaySettings']
         );
 
         add_submenu_page(
-            'wp-duplicate',
-            esc_html__('Help', 'wp-duplicate'),
-            esc_html__('Help', 'wp-duplicate'),
+            'duplicate-content',
+                            esc_html__('Help', 'duplicate-content'),
+                esc_html__('Help', 'duplicate-content'),
             'manage_options',
-            'wp-duplicate-help',
+            'duplicate-content-help',
             [$this, 'displayHelp']
         );
     }
@@ -116,12 +116,12 @@ class AdminController
             $actions['duplicate'] = sprintf(
                 '<a href="%s" class="wpdc-duplicate-action" data-post-id="%d" data-post-type="%s">%s</a>',
                 wp_nonce_url(
-                    admin_url('admin-ajax.php?action=wp_duplicate_post&post_id=' . $post->ID),
-                    'wp_duplicate_post_' . $post->ID
+                    admin_url('admin-ajax.php?action=duplicate_content_post&post_id=' . $post->ID),
+                    'duplicate_content_post_' . $post->ID
                 ),
                 $post->ID,
                 esc_attr($post->post_type),
-                esc_html__('Duplicate', 'wp-duplicate')
+                esc_html__('Duplicate', 'duplicate-content')
             );
         }
 
@@ -135,13 +135,13 @@ class AdminController
                 '<a href="%s" class="wpdc-duplicate-action" data-term-id="%d" data-taxonomy="%s">%s</a>',
                 wp_nonce_url(
                     admin_url(
-                        'admin-ajax.php?action=wp_duplicate_taxonomy&term_id=' . $term->term_id . '&taxonomy=' . $term->taxonomy
+                        'admin-ajax.php?action=duplicate_content_taxonomy&term_id=' . $term->term_id . '&taxonomy=' . $term->taxonomy
                     ),
-                    'wp_duplicate_taxonomy_' . $term->term_id
+                    'duplicate_content_taxonomy_' . $term->term_id
                 ),
                 $term->term_id,
                 esc_attr($term->taxonomy),
-                esc_html__('Duplicate', 'wp-duplicate')
+                esc_html__('Duplicate', 'duplicate-content')
             );
         }
 
@@ -155,27 +155,27 @@ class AdminController
         $nonce   = isset($_GET['_wpnonce']) ? sanitize_text_field(wp_unslash($_GET['_wpnonce'])) : '';
 
         if (empty($post_id) || empty($nonce)) {
-            wp_die(esc_html__('Invalid request parameters.', 'wp-duplicate'), 400);
+            wp_die(esc_html__('Invalid request parameters.', 'duplicate-content'), 400);
         }
 
-        if ( ! wp_verify_nonce($nonce, 'wp_duplicate_post_' . $post_id)) {
-            wp_die(esc_html__('Security check failed.', 'wp-duplicate'), 403);
+        if ( ! wp_verify_nonce($nonce, 'duplicate_content_post_' . $post_id)) {
+            wp_die(esc_html__('Security check failed.', 'duplicate-content'), 403);
         }
 
         if ( ! $this->canUserDuplicate()) {
-            wp_die(esc_html__('You do not have permission to duplicate content.', 'wp-duplicate'), 403);
+            wp_die(esc_html__('You do not have permission to duplicate content.', 'duplicate-content'), 403);
         }
 
         $post = get_post($post_id);
 
         if ( ! $post || ! current_user_can('edit_post', $post_id)) {
-            wp_die(esc_html__('Post not found or you do not have permission to edit it.', 'wp-duplicate'), 404);
+            wp_die(esc_html__('Post not found or you do not have permission to edit it.', 'duplicate-content'), 404);
         }
 
         // Check for concurrent duplication
         $duplication_key = 'wpdc_proc_' . $post_id;
         if (get_transient($duplication_key)) {
-            wp_die(esc_html__('This post is already being duplicated. Please wait.', 'wp-duplicate'), 409);
+            wp_die(esc_html__('This post is already being duplicated. Please wait.', 'duplicate-content'), 409);
         }
 
         set_transient($duplication_key, true, 30);
@@ -197,12 +197,12 @@ class AdminController
                 wp_redirect($redirect_url);
                 exit;
             } else {
-                wp_die(esc_html__('Failed to duplicate post. Please try again.', 'wp-duplicate'), 500);
+                wp_die(esc_html__('Failed to duplicate post. Please try again.', 'duplicate-content'), 500);
             }
         } catch (Exception $e) {
             delete_transient($duplication_key);
             delete_transient('wpdc_unique_' . $post_id);
-            wp_die(esc_html__('An error occurred while duplicating the post.', 'wp-duplicate'), 500);
+            wp_die(esc_html__('An error occurred while duplicating the post.', 'duplicate-content'), 500);
         }
     }
 
@@ -213,35 +213,35 @@ class AdminController
         $nonce    = isset($_GET['_wpnonce']) ? sanitize_text_field(wp_unslash($_GET['_wpnonce'])) : '';
 
         if (empty($term_id) || empty($taxonomy) || empty($nonce)) {
-            wp_die(esc_html__('Invalid request parameters.', 'wp-duplicate'), 400);
+            wp_die(esc_html__('Invalid request parameters.', 'duplicate-content'), 400);
         }
 
-        if ( ! wp_verify_nonce($nonce, 'wp_duplicate_taxonomy_' . $term_id)) {
-            wp_die(esc_html__('Security check failed.', 'wp-duplicate'), 403);
+        if ( ! wp_verify_nonce($nonce, 'duplicate_content_taxonomy_' . $term_id)) {
+            wp_die(esc_html__('Security check failed.', 'duplicate-content'), 403);
         }
 
         if ( ! $this->canUserDuplicate()) {
-            wp_die(esc_html__('You do not have permission to duplicate content.', 'wp-duplicate'), 403);
+            wp_die(esc_html__('You do not have permission to duplicate content.', 'duplicate-content'), 403);
         }
 
         if ( ! taxonomy_exists($taxonomy)) {
-            wp_die(esc_html__('Invalid taxonomy.', 'wp-duplicate'), 400);
+            wp_die(esc_html__('Invalid taxonomy.', 'duplicate-content'), 400);
         }
 
         $term = get_term($term_id, $taxonomy);
 
         if ( ! $term || is_wp_error($term)) {
-            wp_die(esc_html__('Term not found.', 'wp-duplicate'), 404);
+            wp_die(esc_html__('Term not found.', 'duplicate-content'), 404);
         }
 
         if ( ! current_user_can('manage_categories')) {
-            wp_die(esc_html__('You do not have permission to manage taxonomies.', 'wp-duplicate'), 403);
+            wp_die(esc_html__('You do not have permission to manage taxonomies.', 'duplicate-content'), 403);
         }
 
         // Check for concurrent duplication
         $duplication_key = 'wpdc_proc_term_' . $term_id;
         if (get_transient($duplication_key)) {
-            wp_die(esc_html__('This term is already being duplicated. Please wait.', 'wp-duplicate'), 409);
+            wp_die(esc_html__('This term is already being duplicated. Please wait.', 'duplicate-content'), 409);
         }
 
         set_transient($duplication_key, true, 10);
@@ -263,12 +263,12 @@ class AdminController
                 wp_redirect($redirect_url);
                 exit;
             } else {
-                wp_die(esc_html__('Failed to duplicate term. Please try again.', 'wp-duplicate'), 500);
+                wp_die(esc_html__('Failed to duplicate term. Please try again.', 'duplicate-content'), 500);
             }
         } catch (Exception $e) {
             delete_transient($duplication_key);
             delete_transient('wpdc_unique_term_' . $term_id);
-            wp_die(esc_html__('An error occurred while duplicating the term.', 'wp-duplicate'), 500);
+            wp_die(esc_html__('An error occurred while duplicating the term.', 'duplicate-content'), 500);
         }
     }
 
@@ -279,7 +279,7 @@ class AdminController
             return false;
         }
 
-        $permissions = $this->settings->get('wp_duplicate_permissions', ['administrator']);
+        $permissions = $this->settings->get('duplicate_content_permissions', ['administrator']);
 
         // Handle backward compatibility - convert old single value to array
         if ( ! is_array($permissions)) {
@@ -313,29 +313,29 @@ class AdminController
 
     private function isContentTypeEnabled($content_type)
     {
-        $options = get_option('wp_duplicate_options', []);
+        $options = get_option('duplicate_content_options', []);
 
         switch ($content_type) {
             case 'post':
-                return isset($options['wp_duplicate_enable_posts']) ? $options['wp_duplicate_enable_posts'] === '1' : true;
+                return isset($options['duplicate_content_enable_posts']) ? $options['duplicate_content_enable_posts'] === '1' : true;
             case 'page':
-                return isset($options['wp_duplicate_enable_pages']) ? $options['wp_duplicate_enable_pages'] === '1' : true;
+                return isset($options['duplicate_content_enable_pages']) ? $options['duplicate_content_enable_pages'] === '1' : true;
             default:
-                return isset($options['wp_duplicate_enable_custom_post_types']) ? $options['wp_duplicate_enable_custom_post_types'] === '1' : true;
+                return isset($options['duplicate_content_enable_custom_post_types']) ? $options['duplicate_content_enable_custom_post_types'] === '1' : true;
         }
     }
 
     private function isTaxonomyEnabled($taxonomy)
     {
-        $options = get_option('wp_duplicate_options', []);
+        $options = get_option('duplicate_content_options', []);
 
         switch ($taxonomy) {
             case 'category':
-                return isset($options['wp_duplicate_enable_categories']) ? $options['wp_duplicate_enable_categories'] === '1' : true;
+                return isset($options['duplicate_content_enable_categories']) ? $options['duplicate_content_enable_categories'] === '1' : true;
             case 'post_tag':
-                return isset($options['wp_duplicate_enable_tags']) ? $options['wp_duplicate_enable_tags'] === '1' : true;
+                return isset($options['duplicate_content_enable_tags']) ? $options['duplicate_content_enable_tags'] === '1' : true;
             default:
-                return isset($options['wp_duplicate_enable_custom_taxonomies']) ? $options['wp_duplicate_enable_custom_taxonomies'] === '1' : true;
+                return isset($options['duplicate_content_enable_custom_taxonomies']) ? $options['duplicate_content_enable_custom_taxonomies'] === '1' : true;
         }
     }
 

@@ -1,8 +1,8 @@
 <?php
 
-namespace WPDuplicate\Services;
+namespace DuplicateContent\Services;
 
-use WPDuplicate\Models\Settings;
+use DuplicateContent\Models\Settings;
 
 if ( ! defined('ABSPATH')) {
     exit;
@@ -34,13 +34,13 @@ class DuplicationService
             return false;
         }
 
-        $default_status   = $this->settings->get('wp_duplicate_copy_status', 'draft');
-        $title_prefix     = $this->settings->get('wp_duplicate_copy_title', 'Copy of ');
-        $title_suffix     = $this->settings->get('wp_duplicate_copy_suffix', '');
-        $copy_meta        = $this->settings->get('wp_duplicate_copy_meta', '1');
-        $copy_taxonomies  = $this->settings->get('wp_duplicate_copy_taxonomies', '1');
-        $copy_comments    = $this->settings->get('wp_duplicate_copy_comments', '');
-        $copy_attachments = $this->settings->get('wp_duplicate_copy_attachments', '');
+        $default_status   = $this->settings->get('duplicate_content_copy_status', 'draft');
+        $title_prefix     = $this->settings->get('duplicate_content_copy_title', 'Copy of ');
+        $title_suffix     = $this->settings->get('duplicate_content_copy_suffix', '');
+        $copy_meta        = $this->settings->get('duplicate_content_copy_meta', '1');
+        $copy_taxonomies  = $this->settings->get('duplicate_content_copy_taxonomies', '1');
+        $copy_comments    = $this->settings->get('duplicate_content_copy_comments', '');
+        $copy_attachments = $this->settings->get('duplicate_content_copy_attachments', '');
 
         // Handle status based on settings
         $post_status     = $this->validatePostStatus($default_status, $post->post_status);
@@ -84,7 +84,7 @@ class DuplicationService
         }
 
         // Hook for developers
-        do_action('wp_duplicate_post_created', $new_post_id, $post_id);
+        do_action('duplicate_content_post_created', $new_post_id, $post_id);
 
         return $new_post_id;
     }
@@ -111,8 +111,8 @@ class DuplicationService
             return false;
         }
 
-        $title_prefix    = $this->settings->get('wp_duplicate_copy_title', 'Copy of ');
-        $title_suffix    = $this->settings->get('wp_duplicate_copy_suffix', '');
+        $title_prefix    = $this->settings->get('duplicate_content_copy_title', 'Copy of ');
+        $title_suffix    = $this->settings->get('duplicate_content_copy_suffix', '');
         $formatted_title = $this->formatDuplicateTitle($title_prefix, $term->name, $title_suffix);
 
         $base_slug   = sanitize_title($term->slug . '-copy');
@@ -140,7 +140,7 @@ class DuplicationService
         if (isset($new_term['term_id'])) {
             $this->copyTermMeta($term_id, $new_term['term_id']);
 
-            do_action('wp_duplicate_term_created', $new_term['term_id'], $term_id, $taxonomy);
+            do_action('duplicate_content_term_created', $new_term['term_id'], $term_id, $taxonomy);
 
             return $new_term['term_id'];
         }
@@ -413,7 +413,7 @@ class DuplicationService
         $title  = trim(sanitize_text_field($title));
 
         if (empty($title)) {
-            $title = esc_html__('Untitled', 'wp-duplicate');
+            $title = esc_html__('Untitled', 'duplicate-content');
         }
 
         $formatted_title = $title;

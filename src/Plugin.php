@@ -1,12 +1,12 @@
 <?php
 
-namespace WPDuplicate;
+namespace DuplicateContent;
 
 class Plugin
 {
     private static $instance = null;
     private $version = '1.0.0';
-    private $plugin_name = 'wp-duplicate';
+    private $plugin_name = 'duplicate-content';
 
     private function __construct()
     {
@@ -44,8 +44,8 @@ class Plugin
         add_filter('category_row_actions', [$adminController, 'addDuplicateTaxonomyAction'], 10, 2);
 
         // AJAX handlers
-        add_action('wp_ajax_wp_duplicate_post', [$adminController, 'duplicatePostAjax']);
-        add_action('wp_ajax_wp_duplicate_taxonomy', [$adminController, 'duplicateTaxonomyAjax']);
+        add_action('wp_ajax_duplicate_content_post', [$adminController, 'duplicatePostAjax']);
+        add_action('wp_ajax_duplicate_content_taxonomy', [$adminController, 'duplicateTaxonomyAjax']);
 
         // Custom hooks
         add_action('init', [$adminController, 'registerCustomHooks']);

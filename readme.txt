@@ -1,6 +1,6 @@
-=== WP Duplicate - Duplicate any content ===
+=== Duplicate Content ===
 Contributors: naeemhaque
-Plugin URI: https://github.com/naeemhaque/wp-duplicate
+Plugin URI: https://github.com/naeemhaque/duplicate-content
 Author URI: https://profiles.wordpress.org/naeemhaque/
 Tags: duplicate, clone, copy, post, page
 Requires at least: 5.0
@@ -14,7 +14,7 @@ Duplicate your posts, pages, categories, tags, custom post types, and other taxo
 
 == Description ==
 
-WP Duplicate is a powerful WordPress plugin that allows you to duplicate any content type with just one click. Whether you need to duplicate posts, pages, categories, tags, or custom post types, this plugin makes it incredibly easy and efficient.
+Duplicate Content is a powerful WordPress plugin that allows you to duplicate any content type with just one click. Whether you need to duplicate posts, pages, categories, tags, or custom post types, this plugin makes it incredibly easy and efficient.
 
 = Key Features =
 
@@ -40,7 +40,7 @@ WP Duplicate is a powerful WordPress plugin that allows you to duplicate any con
 = How It Works =
 
 1. **Install & Activate**: Upload the plugin and activate it
-2. **Access Menu**: Find "WP Duplicate" in your WordPress admin sidebar
+2. **Access Menu**: Find "Duplicate Content" in your WordPress admin sidebar
 3. **Choose Content**: Select the content type you want to duplicate
 4. **One Click**: Click the duplicate button and you're done!
 
@@ -65,16 +65,16 @@ The plugin adds a clean menu structure to your WordPress admin:
 = Automatic Installation (Recommended) =
 
 1. Go to **WordPress Admin → Plugins → Add New**
-2. Search for "WP Duplicate"
+2. Search for "Duplicate Content"
 3. Click **Install Now**
 4. Click **Activate**
 
 = Manual Installation =
 
 1. Download the plugin ZIP file
-2. Extract the files to `/wp-content/plugins/wp-duplicate/`
+2. Extract the files to `/wp-content/plugins/duplicate-content/`
 3. Go to **WordPress Admin → Plugins**
-4. Find "WP Duplicate" and click **Activate**
+4. Find "Duplicate Content" and click **Activate**
 
 = Requirements =
 
@@ -86,7 +86,7 @@ The plugin adds a clean menu structure to your WordPress admin:
 
 = Can I duplicate custom post types? =
 
-Yes! WP Duplicate supports all custom post types and their associated taxonomies.
+Yes! Duplicate Content supports all custom post types and their associated taxonomies.
 
 = Is it safe to use on production sites? =
 
@@ -94,7 +94,7 @@ Absolutely. The plugin includes proper security measures, nonce verification, an
 
 = Does it work with page builders? =
 
-Yes, WP Duplicate works with all major page builders including Elementor, WPBakery, Divi, and others.
+Yes, Duplicate Content works with all major page builders including Elementor, WPBakery, Divi, and others.
 
 = Can I customize the duplication behavior? =
 
@@ -102,7 +102,7 @@ Yes, the plugin includes a comprehensive settings panel where you can configure 
 
 = Is the plugin translation ready? =
 
-Yes, WP Duplicate is fully internationalized and ready for translation into any language.
+Yes, Duplicate Content is fully internationalized and ready for translation into any language.
 
 = What happens to media files when I duplicate a post? =
 
@@ -114,7 +114,7 @@ Currently, the plugin focuses on single-item duplication for maximum control and
 
 = Does it work with WooCommerce products? =
 
-Yes, WP Duplicate works with WooCommerce products and other e-commerce custom post types.
+Yes, Duplicate Content works with WooCommerce products and other e-commerce custom post types.
 
 = Is there a limit to how many items I can duplicate? =
 
@@ -149,7 +149,7 @@ The plugin doesn't automatically undo duplications, but you can easily delete du
 == Upgrade Notice ==
 
 = 1.0.0 =
-Initial release of WP Duplicate. This version includes all core functionality for duplicating posts, pages, categories, tags, and custom post types.
+Initial release of Duplicate Content. This version includes all core functionality for duplicating posts, pages, categories, tags, and custom post types.
 
 == Support ==
 
